@@ -31,6 +31,7 @@ php_cv_lib_gd_gdImageCreateFromBmp=yes
 php_cv_lib_gd_gdImageCreateFromTga=yes
 --enable-bcmath
 --enable-calendar
+--enable-mydumper
 --enable-exif
 --enable-mbstring
 --enable-opcache
