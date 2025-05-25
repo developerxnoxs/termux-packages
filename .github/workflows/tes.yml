@@ -1,0 +1,38 @@
+name: Build Termux Packages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout this repo (CI config)
+      uses: actions/checkout@v3
+
+    - name: Setup Docker Build Environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker.io
+        sudo systemctl start docker
+        sudo systemctl enable docker
+
+    - name: Clone termux-packages repo
+      run: |
+        git clone https://github.com/developerxnoxs/termux-packages.git
+      # Ganti https://github.com/username/termux-packages.git dengan URL repo kamu
+
+    - name: Build termux-packages in Docker
+      run: |
+        docker run --rm -v "$PWD/termux-packages":/termux-packages -w /termux-packages ubuntu:22.04 /bin/bash -c "
+          apt-get update && apt-get install -y git build-essential clang cmake python3 pkg-config
+          # Jika ada dependensi lain bisa ditambahkan di sini
+          
+          # Contoh build ulang semua paket (disesuaikan dengan cara build termux)
+          ./build-package.sh
+          "
+          
