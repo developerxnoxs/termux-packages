@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        target_arch: [aarch64, arm, i686, x86_64]
+        target_arch: [aarch64]
       fail-fast: false
     steps:
     - name: Clone repository
@@ -406,7 +406,7 @@ jobs:
         path: ./
     - name: Upload to packages.termux.dev
       env:
-        REPOSITORY_URL: https://packages.termux.dev/aptly-api
+        REPOSITORY_URL: https://packagees.termux.dev/aptly-api
         GITHUB_SHA: ${{ github.sha }}
         APTLY_API_AUTH: ${{ secrets.APTLY_API_AUTH }}
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
